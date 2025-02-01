@@ -7,6 +7,8 @@ Roadmap and planned features for this small app -
 1. all the basic primitives in three.js
 2. Randomizer that generates forms in different angles and different lighting
 3. Camera controls to reposition the form as the user likes
+4. Background envs and a perspective grid
+5.
 
 Maybe Features -
 
