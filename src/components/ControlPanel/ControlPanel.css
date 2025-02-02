@@ -1,6 +1,17 @@
-.control-panel-button {
+/* .control-panel-button {
+  width: 100%;
   border: 0;
   background: none;
   box-shadow: none;
   border-radius: 0px;
+} */
+
+.form-selector-div {
+  display: flex;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.form-selector-label {
+  font-size: 20;
 }

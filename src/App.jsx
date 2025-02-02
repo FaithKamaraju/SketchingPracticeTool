@@ -1,6 +1,12 @@
 import React, { useEffect, useRef } from "react";
 
 import { Canvas, extend } from "@react-three/fiber";
+import {
+  OrbitControls,
+  GizmoHelper,
+  GizmoViewcube,
+  GizmoViewport,
+} from "@react-three/drei";
 
 import Menu from "react-burger-menu/lib/menus/slide";
 
@@ -26,11 +32,20 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Menu width={"25%"} noOverlay>
+        <Menu width={"25%"}>
           <h1>Random Shape and Form Generator</h1>
           <ControlPanel />
         </Menu>
         <Canvas>
+          <GizmoHelper alignment="top-right" margin={[80, 80]}>
+            <GizmoViewport
+              axisColors={["red", "green", "blue"]}
+              labelColor="black"
+            />
+          </GizmoHelper>
+          <gridHelper args={[100, 100]} />
+          <axesHelper args={[100]} />
+          <OrbitControls minRadialAngle={Math.PI} maxRadialAngle={Math.PI} />
           <directionalLight args={[0xfffff0, 1]} position={[1, 1, 1]} />
           <Torus />
         </Canvas>
