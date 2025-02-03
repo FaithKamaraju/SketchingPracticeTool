@@ -1,39 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, lazy } from "react";
 
 import { Canvas, extend } from "@react-three/fiber";
-import {
-  OrbitControls,
-  GizmoHelper,
-  GizmoViewcube,
-  GizmoViewport,
-} from "@react-three/drei";
+import { OrbitControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
 
 import Menu from "react-burger-menu/lib/menus/slide";
 
-import Cylinder from "./components/Meshes/CylinderMesh.jsx";
-import Sphere from "./components/Meshes/SphereMesh.jsx";
-import Cube from "./components/Meshes/CubeMesh.jsx";
-import Capsule from "./components/Meshes/CapsuleMesh.jsx";
-import Cone from "./components/Meshes/ConeMesh.jsx";
-import Dodecahedron from "./components/Meshes/DodecahedronMesh.jsx";
-import Icosahedron from "./components/Meshes/IcosahedronMesh.jsx";
-import Octahedron from "./components/Meshes/OctahedronMesh.jsx";
-import Tetrahedron from "./components/Meshes/TetrahedronMesh.jsx";
-import Torus from "./components/Meshes/TorusMesh.jsx";
+const Cylinder = lazy(() => import("./components/Meshes/CylinderMesh.jsx"));
+const Sphere = lazy(() => import("./components/Meshes/SphereMesh.jsx"));
+const Cube = lazy(() => import("./components/Meshes/CubeMesh.jsx"));
+const Capsule = lazy(() => import("./components/Meshes/CapsuleMesh.jsx"));
+const Cone = lazy(() => import("./components/Meshes/ConeMesh.jsx"));
+const Dodecahedron = lazy(() =>
+  import("./components/Meshes/DodecahedronMesh.jsx")
+);
+const Icosahedron = lazy(() =>
+  import("./components/Meshes/IcosahedronMesh.jsx")
+);
+const Octahedron = lazy(() => import("./components/Meshes/OctahedronMesh.jsx"));
+const Tetrahedron = lazy(() =>
+  import("./components/Meshes/TetrahedronMesh.jsx")
+);
+const Torus = lazy(() => import("./components/Meshes/TorusMesh.jsx"));
 
 import ControlPanel from "./components/ControlPanel/ControlPanel.jsx";
 
 import "./App.css";
 
 class App extends React.Component {
-  showSettings(event) {
-    event.preventDefault();
-  }
   render() {
     return (
       <>
         <Menu width={"25%"}>
-          <h1>Random Shape and Form Generator</h1>
+          <h2>Random Shape and Form Generator</h2>
           <ControlPanel />
         </Menu>
         <Canvas>
