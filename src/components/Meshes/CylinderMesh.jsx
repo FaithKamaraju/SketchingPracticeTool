@@ -13,7 +13,7 @@ function Cylinder() {
   return (
     <mesh ref={myref}>
       <cylinderGeometry attach="geometry" args={[2, 2, 2]} />
-      <meshStandardMaterial attach="material" color="grey" />
+      <meshStandardMaterial attach="material" color="hotpink" />
     </mesh>
   );
 }

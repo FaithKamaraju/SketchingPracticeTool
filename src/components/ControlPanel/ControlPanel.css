@@ -6,10 +6,14 @@
   border-radius: 0px;
 } */
 
-.form-selector-div {
+.form-selector-div-top {
   display: flex;
   align-items: center;
   margin-top: 50px;
+}
+.form-selector-div {
+  display: flex;
+  align-items: center;
 }
 
 .form-selector-label {
