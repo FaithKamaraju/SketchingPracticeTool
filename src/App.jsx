@@ -1,94 +1,55 @@
-import React, { useState, lazy, useCallback } from "react";
-
+import React, { useState, useCallback, useRef } from "react";
 import { Canvas, extend } from "@react-three/fiber";
 import { OrbitControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
-
 import Menu from "react-burger-menu/lib/menus/slide";
+import {
+  useTweakpane,
+  usePaneInput,
+  usePaneFolder,
+  useListBlade,
+  useSliderBlade,
+} from "react-tweakpane";
 
-const Cylinder = lazy(() => import("./components/Meshes/CylinderMesh.jsx"));
-const Sphere = lazy(() => import("./components/Meshes/SphereMesh.jsx"));
-const Cube = lazy(() => import("./components/Meshes/CubeMesh.jsx"));
-const Capsule = lazy(() => import("./components/Meshes/CapsuleMesh.jsx"));
-const Cone = lazy(() => import("./components/Meshes/ConeMesh.jsx"));
-const Dodecahedron = lazy(() =>
-  import("./components/Meshes/DodecahedronMesh.jsx")
-);
-const Icosahedron = lazy(() =>
-  import("./components/Meshes/IcosahedronMesh.jsx")
-);
-const Octahedron = lazy(() => import("./components/Meshes/OctahedronMesh.jsx"));
-const Tetrahedron = lazy(() =>
-  import("./components/Meshes/TetrahedronMesh.jsx")
-);
-const Torus = lazy(() => import("./components/Meshes/TorusMesh.jsx"));
+import Mesh from "./components/Mesh.jsx";
 
 import ControlPanel from "./components/ControlPanel/ControlPanel.jsx";
 
 import "./App.css";
 
-function MeshSelector({ selectedForm }) {
-  if (selectedForm === "Cylinder") {
-    return <Cylinder />;
-  } else if (selectedForm === "Sphere") {
-    return <Sphere />;
-  } else if (selectedForm === "Cube") {
-    return <Cube />;
-  } else if (selectedForm === "Capsule") {
-    return <Capsule />;
-  } else if (selectedForm === "Cone") {
-    return <Cone />;
-  } else if (selectedForm === "Dodecahedron") {
-    return <Dodecahedron />;
-  } else if (selectedForm === "Icosahedron") {
-    return <Icosahedron />;
-  } else if (selectedForm === "Octahedron") {
-    return <Octahedron />;
-  } else if (selectedForm === "Tetrahedron") {
-    return <Tetrahedron />;
-  } else if (selectedForm === "Torus") {
-    return <Torus />;
-  }
-}
-
 function App() {
-  const [selectedForm, setSelectedForm] = useState("Torus");
-  const [ambientLight, setAmbientLight] = useState(true);
+  const pane = useTweakpane();
+  const paneRef = useRef(pane);
+  const LightFolder = usePaneFolder(pane, { title: "Lights" });
 
-  const handleFormSelection = useCallback(
-    (form) => {
-      setSelectedForm(form);
-    },
-    [selectedForm]
-  );
-
-  const handleAmbientLight = useCallback(() => {
-    setAmbientLight(!ambientLight);
-  }, [ambientLight]);
+  const [ambientLight] = useSliderBlade(LightFolder, {
+    label: "Ambient Light",
+    value: 1,
+    min: 0,
+    max: 2,
+    step: 0.01,
+    format: (value) => value.toFixed(2),
+  });
 
   return (
     <>
       <Menu width={"25%"}>
         <h2>Random Shape and Form Generator</h2>
-        <ControlPanel
-          selectedForm={selectedForm}
-          setSelectedForm={handleFormSelection}
-          ambientLight={ambientLight}
-          setAmbientLight={handleAmbientLight}
-        />
       </Menu>
       <Canvas camera={{ position: [4, 2, 4] }}>
-        <GizmoHelper alignment="top-right" margin={[80, 80]}>
+        <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
           <GizmoViewport
             axisColors={["red", "green", "blue"]}
             labelColor="black"
           />
         </GizmoHelper>
-        <gridHelper args={[100, 100]} />
-        <axesHelper args={[100]} />
-        <OrbitControls minRadialAngle={Math.PI} maxRadialAngle={Math.PI} />
-        {ambientLight && <ambientLight />}
 
-        <MeshSelector selectedForm={selectedForm} />
+        {true && <gridHelper args={[100, 100]} />}
+        {true && <axesHelper args={[100]} />}
+
+        <OrbitControls minRadialAngle={Math.PI} maxRadialAngle={Math.PI} />
+        <ambientLight intensity={ambientLight} />
+        {/* <DirLight directionalLight={true} /> */}
+        <Mesh paneRef={paneRef.current} />
       </Canvas>
     </>
   );

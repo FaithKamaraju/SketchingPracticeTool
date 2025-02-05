@@ -8,12 +8,7 @@ import Form from "react-bootstrap/Form";
 
 import "./ControlPanel.css";
 
-function ControlPanel({
-  selectedForm,
-  setSelectedForm,
-  ambientLight,
-  setAmbientLight,
-}) {
+function ControlPanel({ selectedForm, setSelectedForm }) {
   return (
     <Stack gap={3}>
       <div className="form-selector-div-top">
@@ -30,8 +25,8 @@ function ControlPanel({
             <NavDropdown.Item onClick={() => setSelectedForm("Sphere")}>
               Sphere
             </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => setSelectedForm("Cube")}>
-              Cube
+            <NavDropdown.Item onClick={() => setSelectedForm("Box")}>
+              Box
             </NavDropdown.Item>
             <NavDropdown.Item onClick={() => setSelectedForm("Capsule")}>
               Capsule
@@ -56,18 +51,6 @@ function ControlPanel({
             </NavDropdown.Item>
           </NavDropdown>
         </Nav>
-      </div>
-      <div className="form-selector-div">
-        <span className="form-selector-label">Ambient Light:</span>
-        <Form.Check
-          reverse
-          defaultChecked={ambientLight}
-          // label="1"
-          // name="group1"
-          type="checkbox"
-          id="ambient-light-check"
-          onChange={setAmbientLight}
-        />
       </div>
     </Stack>
   );
