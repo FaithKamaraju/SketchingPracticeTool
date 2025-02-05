@@ -61,7 +61,6 @@ function GeometrySelector(props) {
 
 function Mesh(props) {
   const myref = useRef();
-
   const pane = props.paneRef;
   const MeshFolder = usePaneFolder(pane, { title: "Mesh" });
 
@@ -82,6 +81,43 @@ function Mesh(props) {
     ],
     value: "Box",
   });
+
+  const [position] = usePaneInput(
+    MeshFolder,
+    "position",
+    {
+      label: "Position",
+    },
+    (event) => {
+      const mesh = myref.current;
+      const { x, y, z } = event.value;
+      mesh.position.set(x, y, z);
+    }
+  );
+  const [rotation] = usePaneInput(
+    MeshFolder,
+    "rotation",
+    {
+      label: "Rotation",
+    },
+    (event) => {
+      const mesh = myref.current;
+      const { x, y, z } = event.value;
+      mesh.rotation.set(x, y, z);
+    }
+  );
+  const [scale] = usePaneInput(
+    MeshFolder,
+    "scale",
+    {
+      label: "Scale",
+    },
+    (event) => {
+      const mesh = myref.current;
+      const { x, y, z } = event.value;
+      mesh.scale.set(x, y, z);
+    }
+  );
 
   return (
     <mesh ref={myref}>

@@ -19,13 +19,18 @@ import "./App.css";
 function App() {
   const dirLightRef = useRef();
 
-  const pane = useTweakpane({
-    Grid: true,
-    Axes: true,
-    position: { x: 1, y: 1, z: 1 },
-    rotation: { x: 0, y: 0, z: 0 },
-    scale: { x: 1, y: 1, z: 1 },
-  });
+  const pane = useTweakpane(
+    {
+      Grid: true,
+      Axes: true,
+      position: { x: 1, y: 1, z: 1 },
+      rotation: { x: 0, y: 0, z: 0 },
+      scale: { x: 1, y: 1, z: 1 },
+    },
+    {
+      title: "Scene Settings",
+    }
+  );
   const [ambientLight] = useSliderBlade(pane, {
     label: "Ambient Light",
     value: 1,
