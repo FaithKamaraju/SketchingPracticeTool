@@ -35,25 +35,25 @@ extend({
 function GeometrySelector(props) {
   switch (props.selectedForm) {
     case "Box":
-      return <boxGeometry {...props} />;
+      return <boxGeometry {...props} args={[2, 2, 2]} />;
     case "Capsule":
-      return <capsuleGeometry {...props} />;
+      return <capsuleGeometry {...props} args={[1, 1, 16, 32]} />;
     case "Cone":
-      return <coneGeometry {...props} />;
+      return <coneGeometry {...props} args={[1, 2, 32]} />;
     case "Cylinder":
-      return <cylinderGeometry {...props} />;
+      return <cylinderGeometry {...props} args={[2, 2, 2]} />;
     case "Dodecahedron":
-      return <dodecahedronGeometry {...props} />;
+      return <dodecahedronGeometry {...props} args={[2, 0]} />;
     case "Icosahedron":
-      return <icosahedronGeometry {...props} />;
+      return <icosahedronGeometry {...props} args={[2, 0]} />;
     case "Octahedron":
-      return <octahedronGeometry {...props} />;
+      return <octahedronGeometry {...props} args={[2, 0]} />;
     case "Sphere":
-      return <sphereGeometry {...props} />;
+      return <sphereGeometry {...props} args={[1, 64, 16]} />;
     case "Tetrahedron":
-      return <tetrahedronGeometry {...props} />;
+      return <tetrahedronGeometry {...props} args={[2, 0]} />;
     case "Torus":
-      return <torusGeometry {...props} />;
+      return <torusGeometry {...props} args={[1, 0.5, 16, 32]} />;
     default:
       return null;
   }

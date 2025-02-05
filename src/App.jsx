@@ -17,11 +17,16 @@ import ControlPanel from "./components/ControlPanel/ControlPanel.jsx";
 import "./App.css";
 
 function App() {
-  const pane = useTweakpane();
-  const paneRef = useRef(pane);
-  const LightFolder = usePaneFolder(pane, { title: "Lights" });
+  const dirLightRef = useRef();
 
-  const [ambientLight] = useSliderBlade(LightFolder, {
+  const pane = useTweakpane({
+    Grid: true,
+    Axes: true,
+    position: { x: 1, y: 1, z: 1 },
+    rotation: { x: 0, y: 0, z: 0 },
+    scale: { x: 1, y: 1, z: 1 },
+  });
+  const [ambientLight] = useSliderBlade(pane, {
     label: "Ambient Light",
     value: 1,
     min: 0,
@@ -29,6 +34,43 @@ function App() {
     step: 0.01,
     format: (value) => value.toFixed(2),
   });
+
+  const [gridCheck, setGridCheck] = usePaneInput(pane, "Grid");
+  const [axesCheck, setAxesCheck] = usePaneInput(pane, "Axes");
+
+  const paneRef = useRef(pane);
+  const DirLightFolder = usePaneFolder(pane, { title: "Directional Light" });
+
+  const [directionalLight] = useSliderBlade(
+    DirLightFolder,
+    {
+      label: "Directional Light",
+      value: 1,
+      min: 0,
+      max: 2,
+      step: 0.01,
+      format: (value) => value.toFixed(2),
+    },
+    (event) => {
+      const dirLight = dirLightRef.current;
+      dirLight.intensity = event.value;
+    }
+  );
+  const [dirLightPos] = usePaneInput(
+    DirLightFolder,
+    "position",
+    {
+      label: "Position",
+      x: { value: 1 },
+      y: { value: 1 },
+      z: { value: 1 },
+    },
+    (event) => {
+      const { x, y, z } = event.value;
+      const dirLight = dirLightRef.current;
+      dirLight.position.set(x, y, z);
+    }
+  );
 
   return (
     <>
@@ -43,11 +85,12 @@ function App() {
           />
         </GizmoHelper>
 
-        {true && <gridHelper args={[100, 100]} />}
-        {true && <axesHelper args={[100]} />}
+        {gridCheck && <gridHelper args={[100, 100]} />}
+        {axesCheck && <axesHelper args={[100]} />}
 
         <OrbitControls minRadialAngle={Math.PI} maxRadialAngle={Math.PI} />
         <ambientLight intensity={ambientLight} />
+        <directionalLight position={[1, 1, 1]} ref={dirLightRef} />
         {/* <DirLight directionalLight={true} /> */}
         <Mesh paneRef={paneRef.current} />
       </Canvas>

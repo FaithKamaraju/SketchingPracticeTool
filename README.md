@@ -14,10 +14,10 @@ Now the roadmap for refactoring of the code -
 - [ ] ~~dat.gui or leva panels for~~ tweakpane panels
   - [x] Dropdown for mesh geometry selector
   - [ ] Dropdown for mesh material selector
-  - [ ] Grid
-  - [ ] Axes
-  - [ ] Directional Light
-  - [ ] Ambient Light
+  - [x] Grid
+  - [x] Axes
+  - [x] Directional Light
+  - [x] Ambient Light
   - [ ] Mesh transform panel
   - [ ] Mesh color panel
 - [ ] Sketchfab integration
