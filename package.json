@@ -1,11 +1,10 @@
 {
   "name": "rdn_form_gen",
-  "homepage": "https://faithkamaraju.github.io/Random-Form-generator/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=./",
     "lint": "eslint .",
     "preview": "vite preview",
     "pre-deploy": "npm run build",
