@@ -19,7 +19,7 @@ Now the roadmap for refactoring of the code -
   - [x] Directional Light
   - [x] Ambient Light
   - [x] Mesh transform panel
-  - [ ] Mesh color panel
+  - [x] Mesh color panel
 - [ ] Sketchfab integration
 - [ ] Url download for any other service for free opensource models
 

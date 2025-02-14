@@ -1,18 +1,23 @@
 import React, { useState, useCallback, useRef } from "react";
 import { Canvas, extend } from "@react-three/fiber";
-import { OrbitControls, GizmoHelper, GizmoViewport } from "@react-three/drei";
+import {
+  OrbitControls,
+  GizmoHelper,
+  GizmoViewport,
+  Stats,
+} from "@react-three/drei";
 import Menu from "react-burger-menu/lib/menus/slide";
 import {
   useTweakpane,
   usePaneInput,
   usePaneFolder,
-  useListBlade,
+  // useListBlade,
   useSliderBlade,
 } from "react-tweakpane";
 
 import Mesh from "./components/Mesh.jsx";
 
-import ControlPanel from "./components/ControlPanel/ControlPanel.jsx";
+// import ControlPanel from "./components/ControlPanel/ControlPanel.jsx";
 
 import "./App.css";
 
@@ -83,6 +88,8 @@ function App() {
         <h2>Random Shape and Form Generator</h2>
       </Menu>
       <Canvas camera={{ position: [4, 2, 4] }}>
+        <Stats />
+        {/* <Sky azimuth={azimuth} inclination={time} distance={1000} /> */}
         <GizmoHelper alignment="bottom-right" margin={[80, 80]}>
           <GizmoViewport
             axisColors={["red", "green", "blue"]}
